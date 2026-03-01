@@ -27,7 +27,7 @@ class Connection:
 
     async def write_command(self, command: bytearray) -> None:
         logging.debug("Sending packet...")
-        await self.client.write_gatt_char(UUID_COMMAND, command)
+        await self.client.write_gatt_char(UUID_COMMAND, command, response=True)
         logging.debug("Packet sent.")
 
         await asyncio.sleep(0.5)
@@ -45,7 +45,7 @@ class Connection:
             await asyncio.sleep(0.5)
 
             logging.debug("Re-sending packet after time sync...")
-            await self.client.write_gatt_char(UUID_COMMAND, command)
+            await self.client.write_gatt_char(UUID_COMMAND, command, response=True)
 
     def notify_handler(self, char: BleakGATTCharacteristic, data: bytearray) -> None:
         if data[0] == 0x09:
