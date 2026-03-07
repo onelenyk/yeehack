@@ -2,9 +2,10 @@ version: '3'
 services:
   yeehack:
     build:
-      context: https://github.com/aso824/yeehack.git
+      context: .
       dockerfile: Dockerfile
-    ports:
-      - "8888:8080"
+    network_mode: host
+    privileged: true
+    restart: unless-stopped
     volumes:
       - '/var/run/dbus:/run/dbus:ro'

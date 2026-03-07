@@ -1,0 +1,11 @@
+venv/
+__pycache__/
+.git/
+.idea/
+.claude/
+*.iml
+*.pyc
+logo.png
+LICENSE
+PROTOCOL.md
+README.md
