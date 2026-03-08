@@ -8,6 +8,6 @@ services:
     privileged: true
     restart: unless-stopped
     environment:
-      - PORT=8080
+      - PORT=${PORT:-8080}
     volumes:
       - '/var/run/dbus:/run/dbus:ro'
