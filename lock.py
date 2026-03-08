@@ -60,7 +60,9 @@ class Lock:
         await self.__do_action(UnlockMode.TEMP_UNLOCK)
 
     async def __do_action(self, mode: UnlockMode) -> None:
-        async with BleakClient(self.device, timeout=self.timeout) as client:
+        client = BleakClient(self.device, timeout=self.timeout)
+        try:
+            await client.connect()
             connection = Connection(client, self.sign_key)
 
             await connection.init()
@@ -69,3 +71,8 @@ class Lock:
             packet.sign(self.sign_key)
 
             await connection.write_command(packet.payload)
+        finally:
+            try:
+                await client.disconnect()
+            except (BleakDBusError, Exception):
+                pass
