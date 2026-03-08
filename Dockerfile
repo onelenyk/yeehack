@@ -13,5 +13,8 @@ COPY . .
 # Install requirements
 RUN pip install -r requirements.txt
 
+# Default port
+ENV PORT=8080
+
 # Set the command to run the server
-CMD ["python", "yeehack.py", "server"]
+CMD python yeehack.py server --port $PORT
