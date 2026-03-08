@@ -2,7 +2,7 @@
 FROM python:3.9-alpine
 
 # add required packages
-RUN apk add --no-cache bluez
+RUN apk add --no-cache bluez curl
 
 # Set the working directory
 WORKDIR /app

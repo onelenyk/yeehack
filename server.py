@@ -203,6 +203,10 @@ class Server:
 
         await Event().wait()
 
+    @routes.get('/health')
+    async def health(request):
+        return web.json_response({'status': 'ok'})
+
     @routes.get('/')
     async def index(request):
         return web.Response(text=INDEX_HTML, content_type='text/html')

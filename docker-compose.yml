@@ -7,6 +7,12 @@ services:
     network_mode: host
     privileged: true
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:${PORT:-8080}/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
     environment:
       - PORT=${PORT:-8080}
     volumes:
